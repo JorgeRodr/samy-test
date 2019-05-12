@@ -4,7 +4,7 @@ import { GET_IMAGES_SUCCESS, GET_IMAGES_FAILURE, GET_IMAGES } from "./actions";
 
 function* getImages(action) {
   try {
-    const images = yield call(get);
+    const images = yield call(get, action.payload);
     yield put({ type: GET_IMAGES_SUCCESS, payload: images });
   } catch (e) {
     yield put({ type: GET_IMAGES_FAILURE, payload: e });

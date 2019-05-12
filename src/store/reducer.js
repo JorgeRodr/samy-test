@@ -1,8 +1,9 @@
-import { LIKE, GET_IMAGES_SUCCESS } from "./actions";
+import { LIKE, GET_IMAGES_SUCCESS, GET_IMAGES } from "./actions";
 
 const initialState = {
-  images: null,
-  pagination: null
+  images: [],
+  pagination: null,
+  loading: false
 };
 
 export default function(state = initialState, action) {
@@ -10,11 +11,18 @@ export default function(state = initialState, action) {
     case LIKE:
       return { ...state, images: updateImages(state.images) };
 
+    case GET_IMAGES: {
+      return { ...state, loading: true };
+    }
+
     case GET_IMAGES_SUCCESS:
+      const images = state.images.concat(action.payload.data);
+      const pagination = action.payload.pagination;
       return {
         ...state,
-        images: action.payload.data,
-        pagination: action.payload.pagination
+        images,
+        pagination,
+        loading: false
       };
 
     default:
@@ -28,6 +36,10 @@ export function getImagesSelector(state) {
 
 export function getPaginationSelector(state) {
   return state.pagination;
+}
+
+export function getLoadingSelector(state) {
+  return state.loading;
 }
 
 function updateImages(images, payload) {

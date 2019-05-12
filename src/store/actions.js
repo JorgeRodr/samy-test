@@ -5,8 +5,8 @@ export const LIKE = "like";
 export const LIKE_SUCCESS = "likeSuccess";
 export const LIKE_FAILURE = "likeFailure";
 
-export function getImagesAction(page) {
-  return { type: GET_IMAGES };
+export function getImagesAction(url) {
+  return { type: GET_IMAGES, payload: url };
 }
 
 export function likeAction(id) {

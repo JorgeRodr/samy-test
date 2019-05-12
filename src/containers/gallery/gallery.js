@@ -4,7 +4,11 @@ import { Image } from "../../components/image/image";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getImagesAction } from "../../store/actions";
-import { getImagesSelector, getPaginationSelector } from "../../store/reducer";
+import {
+  getImagesSelector,
+  getPaginationSelector,
+  getLoadingSelector
+} from "../../store/reducer";
 
 export class Gallery extends Component {
   //añadir constructor cuando sea necesario
@@ -13,14 +17,20 @@ export class Gallery extends Component {
     super(props);
     this.state = {
       images: null,
-      pagination: null
+      pagination: null,
+      loading: false
     };
-    this.doSomething = this.doSomething.bind(this);
-    this.undoSomething = this.undoSomething.bind(this);
+    // this.doSomething = this.doSomething.bind(this);
+    // this.undoSomething = this.undoSomething.bind(this);
+    this.scrollEventListener = this.scrollEventListener.bind(this);
+    this.showLoader = this.showLoader.bind(this);
+    this.loadGallery = this.loadGallery.bind(this);
+    this.loadNoData = this.loadNoData.bind(this);
   }
 
   componentDidMount() {
     this.props.getImagesAction();
+    this.scrollEventListener();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -33,16 +43,22 @@ export class Gallery extends Component {
       const pagination = this.props.pagination;
       this.setState({ ...this.state, pagination });
     }
+
+    if (prevState.loading !== this.props.loading) {
+      const loading = this.props.loading;
+      this.setState({ ...this.state, loading });
+    }
   }
 
-  doSomething() {
-    const images = [this.state.images[0], this.state.images[1]];
-    this.setState({ ...this.state, images });
-  }
-
-  undoSomething() {
-    const images = this.props.images;
-    this.setState({ ...this.state, images });
+  scrollEventListener() {
+    window.onscroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        this.props.getImagesAction(this.state.pagination.next);
+      }
+    };
   }
 
   createGallery(images) {
@@ -60,33 +76,42 @@ export class Gallery extends Component {
     return gallery;
   }
 
+  showLoader() {
+    return <div>Loading...</div>;
+  }
+
+  loadGallery() {
+    return (
+      <React.Fragment>
+        <section className="content">
+          {this.createGallery(this.state.images)}
+        </section>
+        {this.state.loading && this.showLoader()}
+      </React.Fragment>
+    );
+  }
+
+  loadNoData() {
+    return <section className="content">No images loaded</section>;
+  }
+
   render() {
-    if (this.state.images) {
-      return (
-        <div className="gallery">
-          <Header />
-          <button onClick={this.doSomething}>Click</button>
-          <button onClick={this.undoSomething}>Clock</button>
-          <section className="content">
-            {this.createGallery(this.state.images)}
-          </section>
-        </div>
-      );
-    } else {
-      return (
-        <div className="gallery">
-          <Header />
-          <section className="content">No images loaded</section>
-        </div>
-      );
-    }
+    return (
+      <div className="gallery">
+        <Header />
+        {this.state.images && this.state.images.length > 0
+          ? this.loadGallery()
+          : this.loadNoData()}
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
     images: getImagesSelector(state),
-    pagination: getPaginationSelector(state)
+    pagination: getPaginationSelector(state),
+    loading: getLoadingSelector(state)
   };
 }
 
