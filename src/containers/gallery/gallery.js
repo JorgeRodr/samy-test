@@ -9,8 +9,34 @@ import { getImagesSelector } from "../../store/reducer";
 export class Gallery extends Component {
   //añadir constructor cuando sea necesario
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      images: null
+    };
+    this.doSomething = this.doSomething.bind(this);
+    this.undoSomething = this.undoSomething.bind(this);
+  }
+
   componentDidMount() {
     this.props.getImagesAction();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.images !== this.props.images) {
+      const images = this.props.images;
+      this.setState({ images });
+    }
+  }
+
+  doSomething() {
+    const images = [this.state.images[0], this.state.images[1]];
+    this.setState({ images });
+  }
+
+  undoSomething() {
+    const images = this.props.images;
+    this.setState({ images });
   }
 
   createGallery(images) {
@@ -29,12 +55,14 @@ export class Gallery extends Component {
   }
 
   render() {
-    if (this.props.images) {
+    if (this.state.images) {
       return (
         <div className="gallery">
           <Header />
+          <button onClick={this.doSomething}>Click</button>
+          <button onClick={this.undoSomething}>Clock</button>
           <section className="content">
-            {this.createGallery(this.props.images)}
+            {this.createGallery(this.state.images)}
           </section>
         </div>
       );
