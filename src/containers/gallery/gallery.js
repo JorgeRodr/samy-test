@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Header } from '../../components/header/header';
+import { Image } from '../../components/image/image';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { GET_IMAGES, getImages } from "../../store/actions";
@@ -18,7 +19,9 @@ export class Gallery extends Component {
 
       <div className="gallery">
         <Header />
-        <button onClick={this.click}>Click me!</button>
+        <section class="content">
+          <Image />
+        </section>
       </div>
     );
   }
