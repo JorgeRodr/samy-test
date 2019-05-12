@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 
 export class Image extends Component {
-  constructor(props) {
-      super(props);
-  }
-
   render() {
     return (
-    <div className="image">
-        <div class="image-container">
-            <img src="http://lorempixel.com/400/500/"/>
+      <div className="image">
+        <div className="image-container">
+          <img
+            src={this.props.source}
+            title={this.props.title}
+            alt={this.props.title}
+          />
         </div>
-        <div class="title-container">
-            <h3>Título de foto</h3>
-            <span>by</span>
-            <span>nombre de autor</span>
+        <div className="title-container">
+          <h3>{this.props.title}</h3>
+          <span>by</span>
+          <span>{this.props.author}</span>
         </div>
-    </div>      
+      </div>
     );
   }
 }

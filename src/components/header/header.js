@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 
 export class Header extends Component {
-  constructor(props) {
-      super(props);
-  }
+  // añadir constructor cuando toque
 
   render() {
-    return (      
+    return (
       <div className="header">
-        <div class="logo">
-            LOGO
-        </div>
-        <div class="input-containter">
-            <input type="text"></input>
+        <div className="logo">LOGO</div>
+        <div className="input-containter">
+          <input type="text" />
         </div>
       </div>
     );

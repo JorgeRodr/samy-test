@@ -5,10 +5,10 @@ export const LIKE = "like";
 export const LIKE_SUCCESS = "likeSuccess";
 export const LIKE_FAILURE = "likeFailure";
 
-export function getImages(page) {
+export function getImagesAction(page) {
   return { type: GET_IMAGES };
 }
 
-export function like(id) {
+export function likeAction(id) {
   // ...
 }

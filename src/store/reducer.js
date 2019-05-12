@@ -22,6 +22,14 @@ export default function(state = initialState, action) {
   }
 }
 
+export function getImagesSelector(state) {
+  return state.images;
+}
+
+export function getPaginationSelector(state) {
+  return state.pagination;
+}
+
 function updateImages(images, payload) {
   images.forEach((img, index) => {
     if (img.id === payload.id) {
