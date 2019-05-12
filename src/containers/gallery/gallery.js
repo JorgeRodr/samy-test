@@ -4,7 +4,7 @@ import { Image } from "../../components/image/image";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getImagesAction } from "../../store/actions";
-import { getImagesSelector } from "../../store/reducer";
+import { getImagesSelector, getPaginationSelector } from "../../store/reducer";
 
 export class Gallery extends Component {
   //añadir constructor cuando sea necesario
@@ -12,7 +12,8 @@ export class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: null
+      images: null,
+      pagination: null
     };
     this.doSomething = this.doSomething.bind(this);
     this.undoSomething = this.undoSomething.bind(this);
@@ -25,18 +26,23 @@ export class Gallery extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.images !== this.props.images) {
       const images = this.props.images;
-      this.setState({ images });
+      this.setState({ ...this.state, images });
+    }
+
+    if (prevState.pagination !== this.props.pagination) {
+      const pagination = this.props.pagination;
+      this.setState({ ...this.state, pagination });
     }
   }
 
   doSomething() {
     const images = [this.state.images[0], this.state.images[1]];
-    this.setState({ images });
+    this.setState({ ...this.state, images });
   }
 
   undoSomething() {
     const images = this.props.images;
-    this.setState({ images });
+    this.setState({ ...this.state, images });
   }
 
   createGallery(images) {
@@ -79,7 +85,8 @@ export class Gallery extends Component {
 
 function mapStateToProps(state) {
   return {
-    images: getImagesSelector(state)
+    images: getImagesSelector(state),
+    pagination: getPaginationSelector(state)
   };
 }
 
