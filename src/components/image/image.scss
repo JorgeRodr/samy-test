@@ -8,26 +8,7 @@
   .image-container {
     height: 300px;
   }
-@media screen and (min-width: 767px) {
-  .image {
-    width: 90%;
-    justify-self: center;
-    background-color: white;
-    border: 1px solid #e2e2e2;
-  }
 
-  .image-container {
-    height: 300px;
+  .image-title {
+      padding-bottom: 15px;
   }
-}
-
-@media screen and (max-width: 767px) {
-  .image {
-    width: 90%;
-    justify-self: center;
-  }
-
-  .image-container {
-    height: 300px;
-  }
-}
