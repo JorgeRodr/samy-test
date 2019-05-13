@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./header.scss";
 
 export class Header extends Component {
   // añadir constructor cuando toque

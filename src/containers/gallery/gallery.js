@@ -9,6 +9,7 @@ import {
   getPaginationSelector,
   getLoadingSelector
 } from "../../store/reducer";
+import "./gallery.scss";
 
 export class Gallery extends Component {
   //añadir constructor cuando sea necesario
