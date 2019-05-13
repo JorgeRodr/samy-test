@@ -1,15 +1,11 @@
 import React, { Component } from "react";
+import './image.scss';
 
 export class Image extends Component {
   render() {
     return (
       <div className="image">
-        <div className="image-container">
-          <img
-            src={this.props.source}
-            title={this.props.title}
-            alt={this.props.title}
-          />
+        <div className="image-container" style={{ backgroundImage: `url(${this.props.source})` }}>
         </div>
         <div className="title-container">
           <h3>{this.props.title}</h3>

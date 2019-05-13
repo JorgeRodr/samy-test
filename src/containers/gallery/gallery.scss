@@ -2,39 +2,38 @@
   display: grid;
   grid-area: g;
   grid-template-areas:
-    "h h"
-    "c c";
+    "h h h h"
+    "c c c c";
 }
 
 .content {
-  grid-area: c;
-  display: grid;
-  grid-template-areas: "img img img img";
+    background-color: #F6F6F6;
+    padding: 30px;
 }
 
-@media screen and (min-width: 1617px) {
-    .content {
-        grid-area: c;
-        display: grid;
-        grid-template-areas: "img img img img";
-        grid-gap: 15px;
-      }
+@media screen and (min-width: 1024px) {
+  .content {
+    grid-area: c;
+    display: grid;
+    grid-template-areas: ". . . .";
+    grid-row-gap: 15px;
   }
-  
-  @media screen and (min-width: 767px) and (max-width: 1617px) {
-    .content {
-        grid-area: c;
-        display: grid;
-        grid-template-areas: "img img";
-        grid-gap: 15px;
-      }
+}
+
+@media screen and (min-width: 414px) and (max-width: 1024px) {
+  .content {
+    grid-area: c;
+    display: grid;
+    grid-template-areas: ". .";
+    grid-row-gap: 15px;
   }
-  
-  @media screen and (max-width: 767px) {
-    .content {
-        grid-area: c;
-        display: grid;
-        grid-template-areas: "img";
-        grid-gap: 35px;
-      }
+}
+
+@media screen and (max-width: 414px) {
+  .content {
+    grid-area: c;
+    display: grid;
+    grid-template-areas: ".";
+    grid-gap: 35px;
   }
+}
