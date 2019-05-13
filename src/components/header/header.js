@@ -7,8 +7,8 @@ export class Header extends Component {
   render() {
     return (
       <div className="header">
-        <div className="logo">LOGO</div>
-        <div className="input-containter">
+        <div className="header__logo">LOGO</div>
+        <div className="header__input-containter">
           <input type="text" />
         </div>
       </div>

@@ -6,13 +6,13 @@
     "c c c c";
 }
 
-.content {
+.gallery__content {
     background-color: #F6F6F6;
     padding: 30px;
 }
 
 @media screen and (min-width: 1024px) {
-  .content {
+  .gallery__content {
     grid-area: c;
     display: grid;
     grid-template-areas: ". . . .";
@@ -21,7 +21,7 @@
 }
 
 @media screen and (min-width: 414px) and (max-width: 1024px) {
-  .content {
+  .gallery__content {
     grid-area: c;
     display: grid;
     grid-template-areas: ". .";
@@ -30,7 +30,7 @@
 }
 
 @media screen and (max-width: 414px) {
-  .content {
+  .gallery__content {
     grid-area: c;
     display: grid;
     grid-template-areas: ".";

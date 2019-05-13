@@ -5,10 +5,13 @@
     border: 1px solid #e2e2e2;
   }
 
-  .image-container {
+  .image__container {
     height: 300px;
   }
 
-  .image-title {
+  .image__title {
       padding-bottom: 15px;
+      span {
+          padding-right: 5px;
+      }
   }

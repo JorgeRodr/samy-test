@@ -84,7 +84,7 @@ export class Gallery extends Component {
   loadGallery() {
     return (
       <React.Fragment>
-        <section className="content">
+        <section className="gallery__content">
           {this.createGallery(this.state.images)}
         </section>
         {this.state.loading && this.showLoader()}
@@ -93,7 +93,7 @@ export class Gallery extends Component {
   }
 
   loadNoData() {
-    return <section className="content">No images loaded</section>;
+    return <section className="gallery__content">No images loaded</section>;
   }
 
   render() {
