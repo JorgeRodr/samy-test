@@ -1,17 +1,31 @@
 .image {
-    width: 90%;
-    justify-self: center;
-    background-color: white;
-    border: 1px solid #e2e2e2;
-  }
+  width: 90%;
+  justify-self: center;
+  background-color: white;
+  border: 1px solid #e2e2e2;
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+  -o-animation: fadein 1s; /* Opera < 12.1 */
+  animation: fadein 1s;
+}
 
-  .image__container {
-    height: 300px;
-  }
+.image__container {
+  height: 300px;
+}
 
-  .image__title {
-      padding-bottom: 15px;
-      span {
-          padding-right: 5px;
-      }
+.image__title {
+  padding-bottom: 15px;
+  span {
+    padding-right: 5px;
   }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

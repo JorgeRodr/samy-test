@@ -55,7 +55,7 @@ export class Gallery extends Component {
     window.onscroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
+        document.documentElement.offsetHeight && !this.state.loading
       ) {
         this.props.getImagesAction(this.state.pagination.next);
       }
@@ -78,7 +78,7 @@ export class Gallery extends Component {
   }
 
   showLoader() {
-    return <div>Loading...</div>;
+    return <div className="gallery__loader"></div>;
   }
 
   loadGallery() {
