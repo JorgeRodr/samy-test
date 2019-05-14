@@ -10,8 +10,18 @@
   animation: fadein 1s;
 }
 
+@media screen and (min-width: 1024px) {
+  .image {
+    width: 80%;
+  }
+}
+
 .image__container {
   height: 300px;
+  -webkit-transition: 0.2s all;
+  &:hover {
+    -webkit-filter: brightness(50%);
+  }
 }
 
 .image__title {

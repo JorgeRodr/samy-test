@@ -1,0 +1,56 @@
+$hover-color: rgb(66, 243, 66);
+
+%base {
+  position: absolute;
+  bottom: 330px;
+  left: 75%;
+  width: 50px;
+  cursor: pointer;
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+  -o-animation: fadein 1s; /* Opera < 12.1 */
+  animation: fadein 1s;
+}
+
+%selected {
+  svg {
+    color: $hover-color;
+  }
+
+  span {
+    display: block;
+    color: $hover-color;
+  }
+}
+
+.gallery__icon-like {
+  @extend %base;
+
+  svg {
+    color: white;
+  }
+
+  span {
+    display: block;
+    color: white;
+  }
+
+  &:hover {
+    @extend %selected;
+  }
+
+  &--liked {
+    @extend %base;
+    @extend %selected;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -9,6 +9,6 @@ export function getImagesAction(url) {
   return { type: GET_IMAGES, payload: url };
 }
 
-export function likeAction(id) {
-  // ...
+export function likeAction(url) {
+  return { type: LIKE, payload: url };
 }

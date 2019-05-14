@@ -12,6 +12,11 @@
   padding: 30px;
 }
 
+.gallery__element {
+  display: grid;
+  position: relative;
+}
+
 .gallery__loader {
   grid-area: l;
   display: inline-block;

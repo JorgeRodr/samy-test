@@ -26,8 +26,12 @@ app.post("/images/:uri/like", async function(req, res) {
     const parsedImages = JSON.parse(images);
     parsedImages.data.forEach((elem, index) => {
       if (elem.id.toString() === req.params.uri.split("-")[0]) {
-        parsedImages.data[index].liked = true;
-        parsedImages.data[index].likes_count = elem.likes_count + 1;
+        parsedImages.data[index].liked = ! parsedImages.data[index].liked;
+        if(parsedImages.data[index].liked) {
+          parsedImages.data[index].likes_count = elem.likes_count + 1;
+        } else {
+          parsedImages.data[index].likes_count = elem.likes_count - 1;
+        }
       }
     });
     await fs.writeFile(

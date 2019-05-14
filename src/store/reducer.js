@@ -1,15 +1,16 @@
-import { LIKE, GET_IMAGES_SUCCESS, GET_IMAGES } from "./actions";
+import { LIKE, GET_IMAGES_SUCCESS, GET_IMAGES, LIKE_SUCCESS } from "./actions";
 
 const initialState = {
   images: [],
   pagination: null,
-  loading: false
+  loading: false,
+  likedImage: null
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case LIKE:
-      return { ...state, images: updateImages(state.images) };
+    // return { ...state, images: updateImages(state.images) };
 
     case GET_IMAGES: {
       return { ...state, loading: true };
@@ -24,6 +25,9 @@ export default function(state = initialState, action) {
         pagination,
         loading: false
       };
+
+    case LIKE_SUCCESS:
+      return { ...state, images: updateImages(state.images) };
 
     default:
       return state;

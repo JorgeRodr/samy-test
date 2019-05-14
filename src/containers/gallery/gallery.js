@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Header } from "../../components/header/header";
 import { Image } from "../../components/image/image";
+import { Like } from "../../components/like/like";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getImagesAction } from "../../store/actions";
+import { getImagesAction, likeAction } from "../../store/actions";
 import {
   getImagesSelector,
   getPaginationSelector,
@@ -27,6 +28,7 @@ export class Gallery extends Component {
     this.showLoader = this.showLoader.bind(this);
     this.loadGallery = this.loadGallery.bind(this);
     this.loadNoData = this.loadNoData.bind(this);
+    this.handleClickOnLike = this.handleClickOnLike.bind(this);
   }
 
   componentDidMount() {
@@ -55,7 +57,8 @@ export class Gallery extends Component {
     window.onscroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight && !this.state.loading
+          document.documentElement.offsetHeight &&
+        !this.state.loading
       ) {
         this.props.getImagesAction(this.state.pagination.next);
       }
@@ -65,20 +68,37 @@ export class Gallery extends Component {
   createGallery(images) {
     const gallery = [];
     images.forEach(img => {
+      const likeElement = img.links.find(elem => {
+        return elem.rel === "like";
+      });
+
       gallery.push(
-        <Image
-          key={img.id}
-          source={img.main_attachment.big}
-          title={img.title}
-          author={img.author}
-        />
+        <div className="gallery__element" key={"fargment" + img.id}>
+          <Image
+            key={"img" + img.id}
+            source={img.main_attachment.big}
+            title={img.title}
+            author={img.author}
+          />
+          <Like
+            key={"icon" + img.id}
+            url={likeElement.uri}
+            count={img.likes_count}
+            liked={img.liked}
+            onClick={this.handleClickOnLike}
+          />
+        </div>
       );
     });
     return gallery;
   }
 
+  handleClickOnLike(e, data) {
+    this.props.likeAction(data);
+  }
+
   showLoader() {
-    return <div className="gallery__loader"></div>;
+    return <div className="gallery__loader" />;
   }
 
   loadGallery() {
@@ -117,7 +137,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getImagesAction }, dispatch);
+  return bindActionCreators({ getImagesAction, likeAction }, dispatch);
 }
 
 export default connect(

@@ -7,3 +7,13 @@ export function get(url) {
       return data;
     });
 }
+
+export function like(url) {
+  return fetch(url, { method: "POST" })
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      return data;
+    });
+}
