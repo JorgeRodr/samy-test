@@ -29,6 +29,7 @@ export class Gallery extends Component {
     this.loadGallery = this.loadGallery.bind(this);
     this.loadNoData = this.loadNoData.bind(this);
     this.handleClickOnLike = this.handleClickOnLike.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
@@ -97,6 +98,10 @@ export class Gallery extends Component {
     this.props.likeAction(data);
   }
 
+  handleSearch(data) {
+    console.log(data);
+  }
+
   showLoader() {
     return <div className="gallery__loader" />;
   }
@@ -119,7 +124,7 @@ export class Gallery extends Component {
   render() {
     return (
       <div className="gallery">
-        <Header />
+        <Header onSubmit={this.handleSearch} />
         {this.state.images && this.state.images.length > 0
           ? this.loadGallery()
           : this.loadNoData()}
@@ -129,7 +134,6 @@ export class Gallery extends Component {
 }
 
 function mapStateToProps(state) {
-  debugger;
   return {
     images: getImagesSelector(state),
     pagination: getPaginationSelector(state),
