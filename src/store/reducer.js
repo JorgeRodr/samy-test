@@ -9,9 +9,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case LIKE:
-    // return { ...state, images: updateImages(state.images) };
-
     case GET_IMAGES: {
       return { ...state, loading: true };
     }
@@ -27,7 +24,7 @@ export default function(state = initialState, action) {
       };
 
     case LIKE_SUCCESS:
-      return { ...state, images: updateImages(state.images) };
+      return { ...state, images: updateImages(state.images, action.payload) };
 
     default:
       return state;
@@ -53,6 +50,7 @@ function updateImages(images, payload) {
       images[index].likes_count = payload.likes_count;
     }
   });
-
-  return images;
+  return images.map(function(x) {
+    return x;
+  });
 }

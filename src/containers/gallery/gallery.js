@@ -129,6 +129,7 @@ export class Gallery extends Component {
 }
 
 function mapStateToProps(state) {
+  debugger;
   return {
     images: getImagesSelector(state),
     pagination: getPaginationSelector(state),

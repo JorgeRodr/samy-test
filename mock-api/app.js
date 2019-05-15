@@ -38,7 +38,8 @@ app.post("/images/:uri/like", async function(req, res) {
       `${__dirname}/data/images.json`,
       JSON.stringify(parsedImages)
     );
-    res.json(parsedImages);
+    const updatedImage = parsedImages.data.find(elem => elem.id === Number(req.params.uri.split("-")[0]));
+    res.json(updatedImage);
   } catch (e) {
     console.log(e);
   }
