@@ -20,10 +20,14 @@
     }
     @media screen and (min-width: 414px) and (max-width: 1024px) {
       grid-template-columns: 50% 50%;
-      grid-template-areas: ". .";
+      grid-template-areas: 
+      "r r"
+      ". .";
     }
     @media screen and (max-width: 414px) {
-      grid-template-areas: ".";
+      grid-template-areas: 
+      "r"
+      ".";
       grid-gap: 35px;
     }
   }
