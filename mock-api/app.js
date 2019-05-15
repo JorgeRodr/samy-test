@@ -9,7 +9,9 @@ app.get("/images", async function(req, res) {
   try {
     const images = await fs.readFile(`${__dirname}/data/images.json`);
     const parsedImages = JSON.parse(images);
-    if (!req.query || !req.query.page || req.query.page === 1) {
+    if (req.query && req.query.name) {
+      res.json(filterImages(parsedImages));
+    }else if (!req.query || !req.query.page || req.query.page === 1) {
       res.json(parsedImages);
     } else {
       res.json(paginate(req, parsedImages));
@@ -26,8 +28,8 @@ app.post("/images/:uri/like", async function(req, res) {
     const parsedImages = JSON.parse(images);
     parsedImages.data.forEach((elem, index) => {
       if (elem.id.toString() === req.params.uri.split("-")[0]) {
-        parsedImages.data[index].liked = ! parsedImages.data[index].liked;
-        if(parsedImages.data[index].liked) {
+        parsedImages.data[index].liked = !parsedImages.data[index].liked;
+        if (parsedImages.data[index].liked) {
           parsedImages.data[index].likes_count = elem.likes_count + 1;
         } else {
           parsedImages.data[index].likes_count = elem.likes_count - 1;
@@ -38,7 +40,9 @@ app.post("/images/:uri/like", async function(req, res) {
       `${__dirname}/data/images.json`,
       JSON.stringify(parsedImages)
     );
-    const updatedImage = parsedImages.data.find(elem => elem.id === Number(req.params.uri.split("-")[0]));
+    const updatedImage = parsedImages.data.find(
+      elem => elem.id === Number(req.params.uri.split("-")[0])
+    );
     res.json(updatedImage);
   } catch (e) {
     console.log(e);
@@ -80,4 +84,10 @@ function changePagination(pagination, currentPage) {
     pagination.previous = pagination.next.replace("2", Number(currentPage) - 1);
   }
   pagination.next = pagination.next.replace("2", Number(currentPage) + 1);
+}
+
+function filterImages(images) {
+  const filtered = [images.data[0], images.data[1]];
+  images.data = filtered;
+  return images;
 }
