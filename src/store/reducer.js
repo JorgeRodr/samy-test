@@ -1,4 +1,4 @@
-import { LIKE, GET_IMAGES_SUCCESS, GET_IMAGES, LIKE_SUCCESS } from "./actions";
+import { GET_IMAGES_SUCCESS, GET_IMAGES, LIKE_SUCCESS } from "./actions";
 
 const initialState = {
   images: [],
