@@ -7,6 +7,10 @@
   border: 1px solid #e2e2e2;
   @extend %fade_animation;
 
+  @media screen and (min-width: 1024px) {
+    width: 80%;
+  }
+
   &__container {
     height: 300px;
     -webkit-transition: 0.2s all;
@@ -20,11 +24,5 @@
     span {
       padding-right: 5px;
     }
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .image {
-    width: 80%;
   }
 }

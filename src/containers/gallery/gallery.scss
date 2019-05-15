@@ -7,8 +7,21 @@
     ". l l .";
 
   &__content {
+    grid-area: c;
+    display: grid;
+    grid-row-gap: 15px;
     background-color: #f6f6f6;
     padding: 30px;
+    @media screen and (min-width: 1024px) {
+      grid-template-areas: ". . . .";
+    }
+    @media screen and (min-width: 414px) and (max-width: 1024px) {
+      grid-template-areas: ". .";
+    }
+    @media screen and (max-width: 414px) {
+      grid-template-areas: ".";
+      grid-gap: 35px;
+    }
   }
 
   &__element {
@@ -33,33 +46,6 @@
       border-color: #000 transparent #000 transparent;
       animation: gallery__loader 1.2s linear infinite;
     }
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .gallery__content {
-    grid-area: c;
-    display: grid;
-    grid-template-areas: ". . . .";
-    grid-row-gap: 15px;
-  }
-}
-
-@media screen and (min-width: 414px) and (max-width: 1024px) {
-  .gallery__content {
-    grid-area: c;
-    display: grid;
-    grid-template-areas: ". .";
-    grid-row-gap: 15px;
-  }
-}
-
-@media screen and (max-width: 414px) {
-  .gallery__content {
-    grid-area: c;
-    display: grid;
-    grid-template-areas: ".";
-    grid-gap: 35px;
   }
 }
 
