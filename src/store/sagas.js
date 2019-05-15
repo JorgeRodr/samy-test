@@ -6,7 +6,10 @@ import {
   GET_IMAGES,
   LIKE,
   LIKE_SUCCESS,
-  LIKE_FAILURE
+  LIKE_FAILURE,
+  GET_IMAGES_BY_NAME,
+  GET_IMAGES_BY_NAME_SUCCESS,
+  GET_IMAGES_BY_NAME_FAILURE
 } from "./actions";
 
 function* getImages(action) {
@@ -15,6 +18,15 @@ function* getImages(action) {
     yield put({ type: GET_IMAGES_SUCCESS, payload: images });
   } catch (e) {
     yield put({ type: GET_IMAGES_FAILURE, payload: e });
+  }
+}
+
+function* getImagesByName(action) {
+  try {
+    const images = yield call(get, action.payload);
+    yield put({ type: GET_IMAGES_BY_NAME_SUCCESS, payload: images });
+  } catch (e) {
+    yield put({ type: GET_IMAGES_BY_NAME_FAILURE, payload: e });
   }
 }
 
@@ -29,6 +41,7 @@ function* likeImage(action) {
 
 function* saga() {
   yield takeLatest(GET_IMAGES, getImages);
+  yield takeLatest(GET_IMAGES_BY_NAME, getImagesByName);
   yield takeLatest(LIKE, likeImage);
 }
 

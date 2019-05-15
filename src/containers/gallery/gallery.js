@@ -4,11 +4,16 @@ import { Image } from "../../components/image/image";
 import { Like } from "../../components/like/like";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getImagesAction, likeAction } from "../../store/actions";
+import {
+  getImagesAction,
+  likeAction,
+  getImagesByNameAction
+} from "../../store/actions";
 import {
   getImagesSelector,
   getPaginationSelector,
-  getLoadingSelector
+  getLoadingSelector,
+  getOnSearchSelector
 } from "../../store/reducer";
 import "./gallery.scss";
 
@@ -20,16 +25,16 @@ export class Gallery extends Component {
     this.state = {
       images: null,
       pagination: null,
-      loading: false
+      loading: false,
+      onSearch: false
     };
-    // this.doSomething = this.doSomething.bind(this);
-    // this.undoSomething = this.undoSomething.bind(this);
     this.scrollEventListener = this.scrollEventListener.bind(this);
     this.showLoader = this.showLoader.bind(this);
     this.loadGallery = this.loadGallery.bind(this);
     this.loadNoData = this.loadNoData.bind(this);
     this.handleClickOnLike = this.handleClickOnLike.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.loadReturnToGallery = this.loadReturnToGallery.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +57,11 @@ export class Gallery extends Component {
       const loading = this.props.loading;
       this.setState({ ...this.state, loading });
     }
+
+    if (prevState.onSearch !== this.props.onSearch) {
+      const onSearch = this.props.onSearch;
+      this.setState({ ...this.state, onSearch });
+    }
   }
 
   scrollEventListener() {
@@ -59,7 +69,8 @@ export class Gallery extends Component {
       if (
         window.innerHeight + document.documentElement.scrollTop ===
           document.documentElement.offsetHeight &&
-        !this.state.loading
+        !this.state.loading &&
+        this.state.pagination.next
       ) {
         this.props.getImagesAction(this.state.pagination.next);
       }
@@ -99,7 +110,9 @@ export class Gallery extends Component {
   }
 
   handleSearch(data) {
-    console.log(data);
+    this.props.getImagesByNameAction(
+      `${"http://localhost:8080/images"}?name=${data}`
+    );
   }
 
   showLoader() {
@@ -110,6 +123,7 @@ export class Gallery extends Component {
     return (
       <React.Fragment>
         <section className="gallery__content">
+          <div className="gallery__return">{this.state.onSearch ? this.loadReturnToGallery() : null}</div>
           {this.createGallery(this.state.images)}
         </section>
         {this.state.loading && this.showLoader()}
@@ -121,10 +135,17 @@ export class Gallery extends Component {
     return <section className="gallery__content">No images loaded</section>;
   }
 
+  loadReturnToGallery() {
+    return (
+      <span onClick={() => window.location.reload()}>Return to gallery</span>
+    );
+  }
+
   render() {
     return (
       <div className="gallery">
         <Header onSubmit={this.handleSearch} />
+        {this.state.im}
         {this.state.images && this.state.images.length > 0
           ? this.loadGallery()
           : this.loadNoData()}
@@ -137,12 +158,16 @@ function mapStateToProps(state) {
   return {
     images: getImagesSelector(state),
     pagination: getPaginationSelector(state),
-    loading: getLoadingSelector(state)
+    loading: getLoadingSelector(state),
+    onSearch: getOnSearchSelector(state)
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getImagesAction, likeAction }, dispatch);
+  return bindActionCreators(
+    { getImagesAction, likeAction, getImagesByNameAction },
+    dispatch
+  );
 }
 
 export default connect(

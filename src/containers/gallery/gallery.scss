@@ -13,14 +13,30 @@
     background-color: #f6f6f6;
     padding: 30px;
     @media screen and (min-width: 1024px) {
-      grid-template-areas: ". . . .";
+      grid-template-columns: 25% 25% 25% 25%;
+      grid-template-areas:
+        "r r r r"
+        ". . . .";
     }
     @media screen and (min-width: 414px) and (max-width: 1024px) {
+      grid-template-columns: 50% 50%;
       grid-template-areas: ". .";
     }
     @media screen and (max-width: 414px) {
       grid-template-areas: ".";
       grid-gap: 35px;
+    }
+  }
+
+  &__return {
+    grid-area: r;
+    display: flex;
+    justify-content: left;
+    span {
+      cursor: pointer;
+      &:before {
+        content: "<";
+      }
     }
   }
 

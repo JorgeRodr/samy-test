@@ -11,7 +11,7 @@ app.get("/images", async function(req, res) {
     const parsedImages = JSON.parse(images);
     if (req.query && req.query.name) {
       res.json(filterImages(parsedImages));
-    }else if (!req.query || !req.query.page || req.query.page === 1) {
+    } else if (!req.query || !req.query.page || req.query.page === 1) {
       res.json(parsedImages);
     } else {
       res.json(paginate(req, parsedImages));
@@ -89,5 +89,6 @@ function changePagination(pagination, currentPage) {
 function filterImages(images) {
   const filtered = [images.data[0], images.data[1]];
   images.data = filtered;
+  images.pagination.next = null;
   return images;
 }
