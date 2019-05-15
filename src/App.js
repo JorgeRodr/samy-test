@@ -8,7 +8,6 @@ import reducer from "./store/reducer";
 import saga from "./store/sagas";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 import Gallery from "./containers/gallery/gallery";
