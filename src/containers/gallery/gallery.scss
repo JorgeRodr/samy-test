@@ -5,34 +5,34 @@
     "h h h h"
     "c c c c"
     ". l l .";
-}
 
-.gallery__content {
-  background-color: #f6f6f6;
-  padding: 30px;
-}
+  &__content {
+    background-color: #f6f6f6;
+    padding: 30px;
+  }
 
-.gallery__element {
-  display: grid;
-  position: relative;
-}
+  &__element {
+    display: grid;
+    position: relative;
+  }
 
-.gallery__loader {
-  grid-area: l;
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-  margin: auto;
-  &:after {
-    content: " ";
-    display: block;
-    width: 46px;
-    height: 46px;
-    margin: 1px;
-    border-radius: 50%;
-    border: 5px solid #000;
-    border-color: #000 transparent #000 transparent;
-    animation: gallery__loader 1.2s linear infinite;
+  &__loader {
+    grid-area: l;
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    margin: auto;
+    &:after {
+      content: " ";
+      display: block;
+      width: 46px;
+      height: 46px;
+      margin: 1px;
+      border-radius: 50%;
+      border: 5px solid #000;
+      border-color: #000 transparent #000 transparent;
+      animation: gallery__loader 1.2s linear infinite;
+    }
   }
 }
 

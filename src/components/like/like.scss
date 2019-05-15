@@ -1,3 +1,5 @@
+@import "../../assets/sass/utils";
+
 $hover-color: rgb(66, 243, 66);
 
 %base {
@@ -6,11 +8,7 @@ $hover-color: rgb(66, 243, 66);
   left: 75%;
   width: 50px;
   cursor: pointer;
-  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 1s; /* Firefox < 16 */
-  -ms-animation: fadein 1s; /* Internet Explorer */
-  -o-animation: fadein 1s; /* Opera < 12.1 */
-  animation: fadein 1s;
+  @extend %fade_animation;
 }
 
 %selected {
@@ -43,14 +41,5 @@ $hover-color: rgb(66, 243, 66);
   &--liked {
     @extend %base;
     @extend %selected;
-  }
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
