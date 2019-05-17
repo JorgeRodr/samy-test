@@ -12,7 +12,7 @@ import {
   GET_IMAGES_BY_NAME_FAILURE
 } from "./actions";
 
-function* getImages(action) {
+export function* getImages(action) {
   try {
     const images = yield call(get, action.payload);
     yield put({ type: GET_IMAGES_SUCCESS, payload: images });
@@ -21,7 +21,7 @@ function* getImages(action) {
   }
 }
 
-function* getImagesByName(action) {
+export function* getImagesByName(action) {
   try {
     const images = yield call(get, action.payload);
     yield put({ type: GET_IMAGES_BY_NAME_SUCCESS, payload: images });
@@ -30,7 +30,7 @@ function* getImagesByName(action) {
   }
 }
 
-function* likeImage(action) {
+export function* likeImage(action) {
   try {
     const image = yield call(like, action.payload);
     yield put({ type: LIKE_SUCCESS, payload: image });
@@ -39,10 +39,8 @@ function* likeImage(action) {
   }
 }
 
-function* saga() {
+export function* saga() {
   yield takeLatest(GET_IMAGES, getImages);
   yield takeLatest(GET_IMAGES_BY_NAME, getImagesByName);
   yield takeLatest(LIKE, likeImage);
 }
-
-export default saga;
