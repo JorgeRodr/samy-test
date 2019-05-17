@@ -18,16 +18,8 @@ import {
 import "./gallery.scss";
 
 export class Gallery extends Component {
-  //añadir constructor cuando sea necesario
-
   constructor(props) {
     super(props);
-    this.state = {
-      images: null,
-      pagination: null,
-      loading: false,
-      onSearch: false
-    };
     this.scrollEventListener = this.scrollEventListener.bind(this);
     this.showLoader = this.showLoader.bind(this);
     this.loadGallery = this.loadGallery.bind(this);
@@ -42,37 +34,16 @@ export class Gallery extends Component {
     this.scrollEventListener();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.images !== this.props.images) {
-      const images = this.props.images;
-      this.setState({ ...this.state, images });
-    }
-
-    if (prevState.pagination !== this.props.pagination) {
-      const pagination = this.props.pagination;
-      this.setState({ ...this.state, pagination });
-    }
-
-    if (prevState.loading !== this.props.loading) {
-      const loading = this.props.loading;
-      this.setState({ ...this.state, loading });
-    }
-
-    if (prevState.onSearch !== this.props.onSearch) {
-      const onSearch = this.props.onSearch;
-      this.setState({ ...this.state, onSearch });
-    }
-  }
-
   scrollEventListener() {
     window.onscroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop ===
           document.documentElement.offsetHeight &&
-        !this.state.loading &&
-        this.state.pagination.next
+        !this.props.loading &&
+        this.props.pagination &&
+        this.props.pagination.next
       ) {
-        this.props.getImagesAction(this.state.pagination.next);
+        this.props.getImagesAction(this.props.pagination.next);
       }
     };
   }
@@ -123,10 +94,12 @@ export class Gallery extends Component {
     return (
       <React.Fragment>
         <section className="gallery__content">
-          <div className="gallery__return">{this.state.onSearch ? this.loadReturnToGallery() : null}</div>
-          {this.createGallery(this.state.images)}
+          <div className="gallery__return">
+            {this.props.onSearch ? this.loadReturnToGallery() : null}
+          </div>
+          {this.createGallery(this.props.images)}
         </section>
-        {this.state.loading && this.showLoader()}
+        {this.props.loading && this.showLoader()}
       </React.Fragment>
     );
   }
@@ -145,8 +118,7 @@ export class Gallery extends Component {
     return (
       <div className="gallery">
         <Header onSubmit={this.handleSearch} />
-        {this.state.im}
-        {this.state.images && this.state.images.length > 0
+        {this.props.images && this.props.images.length > 0
           ? this.loadGallery()
           : this.loadNoData()}
       </div>
