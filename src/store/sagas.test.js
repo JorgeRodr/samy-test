@@ -14,7 +14,7 @@ import { getImages, getImagesByName, likeImage } from "./sagas";
 import { call, put, select } from "redux-saga/effects";
 import { get, like } from "../services/image.service";
 
-describe("My Saga", () => {
+describe("Redux sagas", () => {
   it("should call get service", () => {
     const action = {
       type: GET_IMAGES,
