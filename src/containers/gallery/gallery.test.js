@@ -5,9 +5,9 @@ import Adapter from "enzyme-adapter-react-16";
 import { shallow } from "enzyme";
 import { Gallery } from "./gallery";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faThumbsUp, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faThumbsUp, faSearch);
+library.add(faThumbsUp);
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -71,6 +71,23 @@ describe("Gallery container", () => {
     expect(spy).toHaveBeenCalled();
   });
 
+  it("should call reload on click return to gallery", () => {
+    Object.defineProperty(window.location, "reload", {
+      configurable: true
+    });
+    window.location.reload = jest.fn();
+    const spy = jest.spyOn(window.location, "reload");
+    wrapper = shallow(
+      <Gallery
+        images={[imageMock]}
+        getImagesAction={mockGetImagesAction}
+        onSearch={true}
+      />
+    );
+    wrapper.find("span").simulate("click");
+    expect(spy).toHaveBeenCalled();
+  });
+
   it("should show loader if loading equals true", () => {
     const spy = jest.spyOn(Gallery.prototype, "showLoader");
     wrapper = shallow(
@@ -105,5 +122,24 @@ describe("Gallery container", () => {
     );
     wrapper.instance().handleSearch();
     expect(mockGetImagesByNameAction).toHaveBeenCalled();
+  });
+
+  it("should call getImagesAction on scroll bottom", () => {
+    window.innerHeight = 0;
+    document.documentElement.scrollTop = 0;
+    const paginationMock = {
+      next: 1
+    };
+    wrapper = shallow(
+      <Gallery
+        getImagesAction={mockGetImagesAction}
+        loading={false}
+        pagination={paginationMock}
+      />
+    );
+
+    window.onscroll();
+
+    expect(mockGetImagesAction).toHaveBeenCalled();
   });
 });

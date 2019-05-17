@@ -47,10 +47,15 @@
     "enzyme-adapter-react-16": "^1.13.0",
     "express": "^4.16.4"
   },
-  "collectCoverageFrom": [
-    "src/**/*.test.{js,jsx,ts,tsx}"
-  ],
-  "coverageReporters": [
-    "text"
-  ]
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/index.{js,jsx,ts,tsx}",
+      "!src/serviceWorker.{js,jsx,ts,tsx}"
+    ],
+    "coverageReporters": [
+      "text",
+      "html"
+    ]
+  }
 }
