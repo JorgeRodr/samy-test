@@ -11,11 +11,7 @@ export class Header extends Component {
   render() {
     return (
       <div className="header">
-        <div className="header__logo">
-          <div>
-            <div></div>
-          </div>
-        </div>
+        <div className="header__logo"></div>
         <div className="header__input-container">
           <form name="search" onSubmit={this.submit}>
             <FontAwesomeIcon icon="search" size="lg" />
