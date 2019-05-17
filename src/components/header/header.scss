@@ -1,8 +1,38 @@
 .header {
-    grid-area: h;
-    display: flex;
-    justify-content: space-between;
-    padding: 100px;
-    background-color: white;
-    align-items: center;
+  grid-area: h;
+  display: flex;
+  justify-content: space-between;
+  padding: 100px;
+  background-color: white;
+  align-items: center;
+
+  @media screen and (max-width: 414px) {
+    padding: 100px 20px
+  }
+
+  &__input-container {
+    form input {
+      border-radius: 100px;
+      border: none;
+      background-color: #f6f6f6;
+      width: 100%;
+      padding: 10px 10px 10px 30px;
+      @media screen and (max-width: 414px) {
+        width: 90%;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    form svg {
+      position: relative;
+      top: 3vh;
+      right: 43%;
+      @media screen and (max-width: 414px) {
+        top: 30px;
+      }
+    }
+  }
 }

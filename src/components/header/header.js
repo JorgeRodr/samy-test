@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.scss";
 
 export class Header extends Component {
@@ -11,9 +12,10 @@ export class Header extends Component {
     return (
       <div className="header">
         <div className="header__logo">LOGO</div>
-        <div className="header__input-containter">
+        <div className="header__input-container">
           <form name="search" onSubmit={this.submit}>
-            <input type="text" />
+            <FontAwesomeIcon icon="search" size="lg" />
+            <input type="text" placeholder="You're looking for something?"/>
           </form>
         </div>
       </div>
