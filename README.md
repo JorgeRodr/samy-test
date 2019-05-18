@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+A test for SamyRoad.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -16,7 +18,7 @@ This project uses Concurrently to run a mock-api parallely on port 8080.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
+Launches the test runner.<br>
 Uses JEST and collects coverage that can be seen in the console or in the coverage folder.
 
 ### `npm run build`
