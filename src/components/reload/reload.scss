@@ -1,0 +1,19 @@
+.gallery__icon-redo {
+  position: absolute;
+  bottom: 280px;
+  left: 75%;
+  width: 50px;
+  transition: transform 0.2s;
+  cursor: pointer;
+  color: white;
+
+  @media screen and (min-width: 1024px) {
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+
+  & > span {
+      display: block;
+  }
+}

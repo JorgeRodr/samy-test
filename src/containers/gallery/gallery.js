@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Header } from "../../components/header/header";
 import { Image } from "../../components/image/image";
 import { Like } from "../../components/like/like";
+import { Reload } from "../../components/reload/reaload";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
@@ -70,6 +71,7 @@ export class Gallery extends Component {
             liked={img.liked}
             onClick={this.handleClickOnLike}
           />
+          <Reload />
         </div>
       );
     });
