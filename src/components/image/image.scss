@@ -19,6 +19,11 @@
       -webkit-filter: brightness(50%);
       filter: brightness(50%);
     }
+
+    & > span {
+      position: fixed;
+      padding: 10px;
+    }
   }
 
   &__title {
@@ -29,7 +34,6 @@
   }
 
   &__triangle {
-    content: "";
     width: 0;
     height: 0;
     border-style: solid;
