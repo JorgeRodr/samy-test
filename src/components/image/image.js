@@ -6,6 +6,7 @@ export class Image extends Component {
     return (
       <div className="image">
         <div className="image__container" style={{ backgroundImage: `url(${this.props.source})` }}>
+          <div className="image__triangle"></div>
         </div>
         <div className="image__title">
           <h3>{this.props.title}</h3>
