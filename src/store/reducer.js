@@ -1,21 +1,25 @@
 import {
   GET_IMAGES_SUCCESS,
   GET_IMAGES,
+  GET_IMAGES_BY_NAME,
+  GET_IMAGES_FAILURE,
   LIKE_SUCCESS,
-  GET_IMAGES_BY_NAME_SUCCESS
+  GET_IMAGES_BY_NAME_SUCCESS,
+  GET_IMAGES_BY_NAME_FAILURE
 } from "./actions";
 
 const initialState = {
   images: [],
   pagination: null,
   loading: false,
-  onSearch: false
+  onSearch: false,
+  error: null
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_IMAGES: {
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: null };
     }
 
     case GET_IMAGES_SUCCESS:
@@ -28,12 +32,32 @@ export default function(state = initialState, action) {
         loading: false
       };
 
+    case GET_IMAGES_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+    }
+
+    case GET_IMAGES_BY_NAME: {
+      return { ...state, images: [], loading: true, error: null };
+    }
+
     case GET_IMAGES_BY_NAME_SUCCESS:
       return {
         ...state,
         images: action.payload.data,
         pagination: action.payload.pagination,
-        onSearch: true
+        onSearch: true,
+        loading: false
+      };
+
+    case GET_IMAGES_BY_NAME_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
       };
 
     case LIKE_SUCCESS:
@@ -58,6 +82,10 @@ export function getLoadingSelector(state) {
 
 export function getOnSearchSelector(state) {
   return state.onSearch;
+}
+
+export function getErrorSelector(state) {
+  return state.error;
 }
 
 function updateImages(images, payload) {

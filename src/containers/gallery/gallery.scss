@@ -4,7 +4,8 @@
   grid-template-areas:
     "h h h h"
     "c c c c"
-    ". l l .";
+    ". l l ."
+    ". e e .";
 
   &__content {
     grid-area: c;
@@ -59,6 +60,8 @@
     display: inline-block;
     width: 64px;
     height: 64px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin: auto;
     &:after {
       content: " ";
@@ -71,6 +74,19 @@
       border-color: #000 transparent #000 transparent;
       animation: gallery__loader 1.2s linear infinite;
     }
+  }
+}
+
+.error {
+  &__wrapper {
+    grid-area: e;
+    padding: 20px;
+    color: #d8000c;
+    background-color: #ffbaba;
+    text-align: left;
+    margin: 20px;
+    width: 50%;
+    justify-self: center;
   }
 }
 
