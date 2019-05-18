@@ -12,7 +12,7 @@ import {
 } from "./actions";
 import { getImages, getImagesByName, likeImage } from "./sagas";
 import { call, put, select } from "redux-saga/effects";
-import { get, like } from "../services/image.service";
+import { get, getByName, like } from "../services/image.service";
 
 describe("Redux sagas", () => {
   it("should call get service", () => {
@@ -34,7 +34,7 @@ describe("Redux sagas", () => {
       payload: "url"
     };
     const iterator = getImagesByName(action);
-    const expectedYield = call(get, action.payload);
+    const expectedYield = call(getByName, action.payload);
 
     const actualYield = iterator.next().value;
 
@@ -73,7 +73,7 @@ describe("Redux sagas", () => {
     const expectedPayload = undefined;
     const iterator = getImagesByName(action);
 
-    expect(iterator.next().value).toEqual(call(get, action.payload));
+    expect(iterator.next().value).toEqual(call(getByName, action.payload));
     expect(iterator.next().value).toEqual(
       put({ type: GET_IMAGES_BY_NAME_SUCCESS, payload: expectedPayload })
     );
