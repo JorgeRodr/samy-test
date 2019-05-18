@@ -57,7 +57,7 @@ export class Gallery extends Component {
       });
 
       gallery.push(
-        <div className="gallery__element" key={"fargment" + img.id}>
+        <div className="gallery__element" key={"fragment" + img.id}>
           <Image
             key={"img" + img.id}
             source={img.main_attachment.big}
@@ -83,9 +83,7 @@ export class Gallery extends Component {
   }
 
   handleSearch(data) {
-    this.props.getImagesByNameAction(
-      `${"http://localhost:8080/images"}?name=${data}`
-    );
+    this.props.getImagesByNameAction(data);
   }
 
   showLoader() {

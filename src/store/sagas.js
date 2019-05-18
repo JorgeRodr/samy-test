@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { get, like } from "../services/image.service";
+import { get, getByName, like } from "../services/image.service";
 import {
   GET_IMAGES_SUCCESS,
   GET_IMAGES_FAILURE,
@@ -23,7 +23,7 @@ export function* getImages(action) {
 
 export function* getImagesByName(action) {
   try {
-    const images = yield call(get, action.payload);
+    const images = yield call(getByName, action.payload);
     yield put({ type: GET_IMAGES_BY_NAME_SUCCESS, payload: images });
   } catch (e) {
     yield put({ type: GET_IMAGES_BY_NAME_FAILURE, payload: e });
