@@ -54,7 +54,7 @@ app.listen(8080, function() {
 });
 
 function paginate(req, parsedImages) {
-  let i = (Number(req.query.page) - 1) * 10;
+  let i = (Number(req.query.page) - 1) * 12;
 
   changeData(parsedImages.data, i);
 
