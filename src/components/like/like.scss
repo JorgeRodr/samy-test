@@ -8,7 +8,12 @@ $hover-color: rgb(66, 243, 66);
   left: 75%;
   width: 50px;
   cursor: pointer;
+  transition: transform 0.2s;
   @extend %fade_animation;
+
+  &:hover {
+    transform: scale(1.5);
+  }
 }
 
 %selected {
@@ -32,10 +37,6 @@ $hover-color: rgb(66, 243, 66);
   span {
     display: block;
     color: white;
-  }
-
-  &:hover {
-    @extend %selected;
   }
 
   &--liked {
