@@ -16,12 +16,13 @@ library.add(faThumbsUp);
 describe("like component", () => {
   let wrapper;
   let mockClick = jest.fn();
-
-  beforeEach(() => {
-    wrapper = shallow(<Like onClick={mockClick} />);
-  });
   it("should emit event on click", () => {
+    wrapper = shallow(<Like onClick={mockClick} />);
     wrapper.find(".gallery__icon-like").simulate("click");
     expect(mockClick).toHaveBeenCalled();
+  });
+
+  it("should change class on props liked", () => {
+    wrapper = shallow(<Like onClick={mockClick} liked={true} />);
   });
 });

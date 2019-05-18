@@ -105,6 +105,42 @@ describe("Redux reducer", () => {
     expect(reducer(state, action)).toStrictEqual(expectedState);
   });
 
+  it("should cover not update image branch on like success", () => {
+    const imageMock = {
+      id: 1
+    };
+    const expectedState = {
+      ...initialState,
+      images: [
+        {
+          id: 1,
+          liked: true,
+          likes_count: 5
+        }
+      ]
+    };
+
+    const state = {
+      ...initialState,
+      images: [
+        {
+          id: 1,
+          liked: true,
+          likes_count: 5
+        }
+      ]
+    };
+    const action = {
+      type: LIKE_SUCCESS,
+      payload: {
+        id: 2,
+        liked: false,
+        likes_count: 4
+      }
+    };
+    expect(reducer(state, action)).toStrictEqual(expectedState);
+  });
+
   it("should return error when images error action is called", () => {
     const expectedState = { ...initialState, error: "error" };
     const action = {

@@ -50,6 +50,7 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/interceptor.{js,jsx,ts,tsx}",
       "!src/index.{js,jsx,ts,tsx}",
       "!src/serviceWorker.{js,jsx,ts,tsx}"
     ],

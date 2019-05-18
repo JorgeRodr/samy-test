@@ -124,6 +124,17 @@ describe("Gallery container", () => {
     expect(mockGetImagesByNameAction).toHaveBeenCalled();
   });
 
+  it("should cover not to call handleSearch possibility", () => {
+    const mockGetImagesByNameAction = jest.fn();
+    wrapper = shallow(
+      <Gallery
+        getImagesAction={mockGetImagesAction}
+        getImagesByNameAction={mockGetImagesByNameAction}
+      />
+    );
+    wrapper.instance().handleSearch("");
+  });
+
   it("should call getImagesAction on scroll bottom", () => {
     window.innerHeight = 0;
     document.documentElement.scrollTop = 0;
@@ -156,5 +167,32 @@ describe("Gallery container", () => {
     wrapper.instance().loadNoData();
 
     expect(spy).toHaveBeenCalled();
+  });
+
+  it("should cover error possibility on load gallery", () => {
+    const spy = jest.spyOn(Gallery.prototype, "loadGallery");
+    wrapper = shallow(
+      <Gallery
+        getImagesAction={mockGetImagesAction}
+        images={[imageMock]}
+        loading={false}
+        error={true}
+      />
+    );
+
+    wrapper.instance().loadGallery();
+
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it("should cover no scroll possibility", () => {
+    const paginationMock = {
+      next: 1
+    };
+
+    const action = jest.fn();
+    wrapper = shallow(<Gallery getImagesAction={action} error={true} />);
+
+    window.onscroll();
   });
 });
