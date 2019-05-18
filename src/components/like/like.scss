@@ -11,8 +11,10 @@ $hover-color: rgb(66, 243, 66);
   transition: transform 0.2s;
   @extend %fade_animation;
 
-  &:hover {
-    transform: scale(1.5);
+  @media screen and (min-width: 1024px) {
+    &:hover {
+      transform: scale(1.5);
+    }
   }
 }
 
