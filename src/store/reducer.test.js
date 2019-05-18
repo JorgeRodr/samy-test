@@ -22,12 +22,20 @@ describe("Redux reducer", () => {
     images: [],
     pagination: null,
     loading: false,
-    onSearch: false
+    onSearch: false,
+    error: null
   };
 
   it("should return loading on get images", () => {
     const expectedState = { ...initialState, loading: true };
     expect(reducer(initialState, { type: GET_IMAGES })).toStrictEqual(
+      expectedState
+    );
+  });
+
+  it("should return loading on get images by name", () => {
+    const expectedState = { ...initialState, loading: true };
+    expect(reducer(initialState, { type: GET_IMAGES_BY_NAME })).toStrictEqual(
       expectedState
     );
   });
@@ -95,6 +103,24 @@ describe("Redux reducer", () => {
       }
     };
     expect(reducer(state, action)).toStrictEqual(expectedState);
+  });
+
+  it("should return error when images error action is called", () => {
+    const expectedState = { ...initialState, error: "error" };
+    const action = {
+      type: GET_IMAGES_FAILURE,
+      payload: "error"
+    };
+    expect(reducer(initialState, action)).toStrictEqual(expectedState);
+  });
+
+  it("should return error when images by name error action is called", () => {
+    const expectedState = { ...initialState, error: "error" };
+    const action = {
+      type: GET_IMAGES_BY_NAME_FAILURE,
+      payload: "error"
+    };
+    expect(reducer(initialState, action)).toStrictEqual(expectedState);
   });
 
   it("should return images", () => {

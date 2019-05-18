@@ -120,7 +120,7 @@ describe("Gallery container", () => {
         getImagesByNameAction={mockGetImagesByNameAction}
       />
     );
-    wrapper.instance().handleSearch();
+    wrapper.instance().handleSearch("nombre");
     expect(mockGetImagesByNameAction).toHaveBeenCalled();
   });
 
@@ -141,5 +141,20 @@ describe("Gallery container", () => {
     window.onscroll();
 
     expect(mockGetImagesAction).toHaveBeenCalled();
+  });
+
+  it("should show error when error occurs", () => {
+    const spy = jest.spyOn(Gallery.prototype, "showError");
+    wrapper = shallow(
+      <Gallery
+        getImagesAction={mockGetImagesAction}
+        loading={false}
+        error={true}
+      />
+    );
+
+    wrapper.instance().loadNoData();
+
+    expect(spy).toHaveBeenCalled();
   });
 });
