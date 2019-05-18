@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Header } from "../../components/header/header";
 import { Image } from "../../components/image/image";
 import { Like } from "../../components/like/like";
-import { Reload } from "../../components/reload/reaload";
+import { Reload } from "../../components/reload/reload";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
