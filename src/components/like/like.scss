@@ -2,14 +2,14 @@
 
 $hover-color: rgb(66, 243, 66);
 
-%base {
+@mixin base {
   position: absolute;
   bottom: 330px;
   left: 75%;
   width: 50px;
   cursor: pointer;
   transition: transform 0.2s;
-  @extend %fade_animation;
+  @include fade_animation;
 
   @media screen and (min-width: 1024px) {
     &:hover {
@@ -18,31 +18,49 @@ $hover-color: rgb(66, 243, 66);
   }
 }
 
-%selected {
+@mixin selected {
   svg {
     color: $hover-color;
   }
 
   span {
-    display: block;
     color: $hover-color;
   }
 }
 
-.gallery__icon-like {
-  @extend %base;
+@media screen and (min-width: 414px) {
+  .gallery__icon-like {
+    @include base;
 
-  svg {
-    color: white;
+    svg {
+      color: white;
+    }
+
+    span {
+      display: block;
+      color: white;
+    }
+
+    &--liked {
+      @include base;
+      @include selected;
+
+      span {
+        display: block;
+      }
+    }
   }
+}
 
-  span {
-    display: block;
-    color: white;
-  }
+@media screen and (max-width: 414px) {
+  .gallery__icon-like {
+    grid-area: like;
+    padding: 10px;
 
-  &--liked {
-    @extend %base;
-    @extend %selected;
+    &--liked {
+      grid-area: like;
+      padding: 10px;
+      @include selected;
+    }
   }
 }

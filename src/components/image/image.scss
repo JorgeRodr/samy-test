@@ -5,7 +5,13 @@
   justify-self: center;
   background-color: white;
   border: 1px solid #e2e2e2;
-  @extend %fade_animation;
+  @include fade_animation;
+
+  h3 {
+    font-size: 1.5em;
+    margin: 0;
+    margin-top: 10px;
+  }
 
   @media screen and (min-width: 1024px) {
     width: 80%;
@@ -40,5 +46,14 @@
     border-width: 100px 100px 0 0;
     border-color: #ffffff transparent transparent transparent;
     justify-self: left;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .image {
+    grid-area: img;
+    &__container {
+      height: 240px;
+    }
   }
 }

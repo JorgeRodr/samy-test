@@ -1,4 +1,4 @@
-%fade_animation {
+@mixin fade_animation {
   -webkit-animation: fadein 1s;
   -moz-animation: fadein 1s;
   -ms-animation: fadein 1s;

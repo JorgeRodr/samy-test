@@ -1,19 +1,31 @@
-.gallery__icon-redo {
-  position: absolute;
-  bottom: 280px;
-  left: 75%;
-  width: 50px;
-  transition: transform 0.2s;
-  cursor: pointer;
-  color: white;
+@import "../../assets/sass/utils";
 
-  @media screen and (min-width: 1024px) {
-    &:hover {
-      transform: scale(1.5);
+@media screen and (min-width: 414px) {
+  .gallery__icon-redo {
+    position: absolute;
+    bottom: 280px;
+    left: 75%;
+    width: 50px;
+    transition: transform 0.2s;
+    cursor: pointer;
+    color: white;
+    @include fade_animation;
+
+    @media screen and (min-width: 1024px) {
+      &:hover {
+        transform: scale(1.5);
+      }
+    }
+
+    & > span {
+      display: block;
     }
   }
-
-  & > span {
-      display: block;
-  }
 }
+
+@media screen and (max-width: 414px) {
+    .gallery__icon-redo {
+      grid-area: redo;
+      padding: 10px;
+    }
+  }
